@@ -9,6 +9,13 @@ var AdmZip = require('adm-zip');
 
 var Promise = require('bluebird');
 
+var caw = undefined;
+
+try {
+  caw = require('caw')();
+} catch (e) {
+}
+
 var platform = os.platform();
 var arch = os.arch();
 
@@ -40,7 +47,7 @@ if (platform === 'win32') {
 }
 
 process.stdout.write('Downloading geckodriver... ');
-got.stream(url.parse(downloadUrl))
+got.stream(url.parse(downloadUrl), { agent: caw })
   .pipe(fs.createWriteStream(outFile))
   .on('close', function() {
     process.stdout.write('Extracting... ');
