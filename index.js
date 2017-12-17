@@ -3,13 +3,12 @@ var fs = require('fs');
 var path = require('path');
 var url = require('url');
 
-var got = require('got');
+var request = require('request');
 var tar = require('tar');
 var AdmZip = require('adm-zip');
 
 var Promise = require('bluebird');
 
-var caw = require('caw')();
 
 var platform = os.platform();
 var arch = os.arch();
@@ -42,7 +41,7 @@ if (platform === 'win32') {
 }
 
 process.stdout.write('Downloading geckodriver... ');
-got.stream(url.parse(downloadUrl), { agent: caw })
+request(url.parse(downloadUrl))
   .pipe(fs.createWriteStream(outFile))
   .on('close', function() {
     process.stdout.write('Extracting... ');
