@@ -41,7 +41,7 @@ if (platform === 'win32') {
 }
 
 process.stdout.write('Downloading geckodriver... ');
-request(url.parse(downloadUrl))
+request(downloadUrl)
   .pipe(fs.createWriteStream(outFile))
   .on('close', function() {
     process.stdout.write('Extracting... ');
