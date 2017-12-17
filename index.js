@@ -9,12 +9,7 @@ var AdmZip = require('adm-zip');
 
 var Promise = require('bluebird');
 
-var caw = undefined;
-
-try {
-  caw = require('caw')();
-} catch (e) {
-}
+var caw = require('caw')();
 
 var platform = os.platform();
 var arch = os.arch();
